@@ -10,25 +10,26 @@ import SwiftUI
 
 class ViewController: UIViewController {
     
-    let viewCenter: UIView = {
-        let view = UIView()
+    let viewCenter: UIControl = {
+        let view = UIControl()
         view.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         view.backgroundColor = .red
         view.layer.cornerRadius = 50
+        view.addTarget(self, action: #selector(tapToRed), for: .touchUpInside)
         return view
     }()
-
+    
     let roundButton: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         button.backgroundColor = .purple
         button.layer.cornerRadius = 100
-//        button.clipsToBounds = false
-        button.layer.masksToBounds = false
-        button.layer.shadowColor = UIColor.gray.cgColor
-        button.layer.shadowOffset = CGSize(width: 2, height: 4)
-        button.layer.shadowOpacity = 1
-        button.layer.shadowRadius = 2
+        //        button.clipsToBounds = false
+        //        button.layer.masksToBounds = false
+        //        button.layer.shadowColor = UIColor.gray.cgColor
+        //        button.layer.shadowOffset = CGSize(width: 2, height: 4)
+        //        button.layer.shadowOpacity = 1
+        //        button.layer.shadowRadius = 2
         
         button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         return button
@@ -37,16 +38,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         view.addSubview(roundButton)
-        roundButton.center = view.center
-        
         roundButton.addSubview(viewCenter)
-        viewCenter.center = view.center
+        roundButton.center = view.center
     }
     
     @objc func tapButton() {
         print("TAP")
+    }
+    
+    @objc func tapToRed() {
+        print("Tap To Red")
     }
 }
 
@@ -68,7 +70,6 @@ struct MyProvider: PreviewProvider {
         }
         
         func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            
         }
     }
 }
